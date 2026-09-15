@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<title>Penny Map</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ペニーマップ</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+html, body, #map {
+  height: 100%;
+  margin: 0;
+}
+
+.info {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+</style>
 </head>
+
 <body>
-<h1>ペニーマップ</h1>
-<p>サイト作成成功！</p>
+
+<div class="info">
+🛹 ペニーマップ<br>
+地図をタップして路面情報を登録
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+const map = L.map('map').setView([31.9111,131.4239], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+
+map.on('click', function(e){
+
+  const comment = prompt(
+    "路面情報を入力してください\n例：歩道が広い、アスファルト荒い"
+  );
+
+  if(!comment) return;
+
+  L.marker(e.latlng)
+    .addTo(map)
+    .bindPopup(comment);
+});
+</script>
+
 </body>
 </html>
