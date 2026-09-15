@@ -39,24 +39,77 @@ html, body, #map {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+
 const map = L.map('map').setView([31.9111,131.4239], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
-}).addTo(map);
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+attribution:'© OpenStreetMap'
+}
+).addTo(map);
+
+function saveMarker(lat,lng,comment){
+
+const markers =
+JSON.parse(localStorage.getItem("pennyMarkers") || "[]");
+
+markers.push({
+lat,
+lng,
+comment
+});
+
+localStorage.setItem(
+"pennyMarkers",
+JSON.stringify(markers)
+);
+
+}
+
+function addMarker(lat,lng,comment){
+
+L.marker([lat,lng])
+.addTo(map)
+.bindPopup(comment);
+
+}
+
+const savedMarkers =
+JSON.parse(localStorage.getItem("pennyMarkers") || "[]");
+
+savedMarkers.forEach(marker => {
+
+addMarker(
+marker.lat,
+marker.lng,
+marker.comment
+);
+
+});
 
 map.on('click', function(e){
 
-  const comment = prompt(
-    "路面情報を入力してください\n例：歩道が広い、アスファルト荒い"
-  );
+const comment = prompt(
+"路面情報を入力してください"
+);
 
-  if(!comment) return;
+if(!comment) return;
 
-  L.marker(e.latlng)
-    .addTo(map)
-    .bindPopup(comment);
+addMarker(
+e.latlng.lat,
+e.latlng.lng,
+comment
+);
+
+saveMarker(
+e.latlng.lat,
+e.latlng.lng,
+comment
+);
+
 });
+
 </script>
 
 </body>
