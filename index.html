@@ -35,6 +35,17 @@ html, body, #map {
   border-radius: 50%;
   font-size: 20px;
 }  
+
+.road-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 80px;
+  z-index: 1000;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+}
   
 </style>
 </head>
@@ -50,6 +61,10 @@ html, body, #map {
 
 <button class="location-btn" onclick="goToLocation()">
 📍
+</button>
+
+<button class="road-btn">
+🛣️
 </button>
   
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
