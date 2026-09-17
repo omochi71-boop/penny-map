@@ -24,6 +24,18 @@ html, body, #map {
   border-radius: 10px;
   font-size: 14px;
 }
+
+.location-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+  z-index: 1000;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+}  
+  
 </style>
 </head>
 
@@ -36,6 +48,10 @@ html, body, #map {
 
 <div id="map"></div>
 
+<button class="location-btn" onclick="goToLocation()">
+📍
+</button>
+  
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
@@ -144,6 +160,38 @@ Number(rating)
 
 });
 
+function goToLocation(){
+
+if(!navigator.geolocation){
+alert("位置情報が使えません");
+return;
+}
+
+navigator.geolocation.getCurrentPosition(
+
+(position)=>{
+
+const lat = position.coords.latitude;
+const lng = position.coords.longitude;
+
+map.setView([lat,lng],17);
+
+L.circleMarker([lat,lng],{
+radius:8
+}).addTo(map)
+.bindPopup("現在地")
+.openPopup();
+
+},
+
+()=>{
+alert("位置情報の取得に失敗しました");
+}
+
+);
+
+}
+  
 </script>
 
 </body>
