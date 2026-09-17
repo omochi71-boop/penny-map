@@ -90,22 +90,33 @@ marker.comment
 
 map.on('click', function(e){
 
+const rating = prompt(
+"路面評価を入力してください（1〜5）"
+);
+
+if(!rating) return;
+
 const comment = prompt(
 "路面情報を入力してください"
 );
 
 if(!comment) return;
 
+const stars = "★".repeat(Number(rating));
+
+const text =
+stars + "<br>" + comment;
+
 addMarker(
 e.latlng.lat,
 e.latlng.lng,
-comment
+text
 );
 
 saveMarker(
 e.latlng.lat,
 e.latlng.lng,
-comment
+text
 );
 
 });
