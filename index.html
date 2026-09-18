@@ -147,7 +147,7 @@ L.marker([lat,lng], {icon})
 
 }
 
-function addRoad(points,rating){
+function addRoad(points,rating,comment){
 
 let color = "blue";
 
@@ -165,6 +165,12 @@ weight: 6
 }
 ).addTo(map);
 
+road.bindPopup(
+"★".repeat(rating) +
+"<br>" +
+comment
+);
+  
 road.on("click", function(){
 
 if(confirm("この道路を削除しますか？")){
@@ -196,6 +202,7 @@ roads.forEach(road => {
 addRoad(
 road.points,
 road.rating
+road.comment
 );
 
 });
@@ -325,14 +332,22 @@ const rating = prompt(
 
 if(!rating) return;
 
+const comment = prompt(
+"道路コメントを入力してください"
+);
+
+if(!comment) return;
+  
 addRoad(
 roadPoints,
-Number(rating)
+Number(rating),
+comment
 );
 
 roads.push({
 points: roadPoints,
-rating: Number(rating)
+rating: Number(rating),
+comment: comment
 });
 
 localStorage.setItem(
