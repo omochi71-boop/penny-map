@@ -63,7 +63,7 @@ html, body, #map {
 📍
 </button>
 
-<button class="road-btn">
+<button class="road-btn" onclick="toggleRoadMode()">
 🛣️
 </button>
   
@@ -73,6 +73,10 @@ html, body, #map {
 
 const map = L.map('map').setView([31.9111,131.4239], 13);
 
+let roadMode = false;
+let roadPoints = [];
+let tempLine = null;
+  
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
@@ -142,6 +146,28 @@ marker.rating
 
 map.on('click', function(e){
 
+if(roadMode){
+
+roadPoints.push([
+e.latlng.lat,
+e.latlng.lng
+]);
+
+if(tempLine){
+map.removeLayer(tempLine);
+}
+
+tempLine = L.polyline(
+roadPoints,
+{
+color:"blue",
+weight:5
+}
+).addTo(map);
+
+return;
+}
+  
 const rating = prompt(
 "路面評価を入力してください（1〜5）"
 );
@@ -204,6 +230,29 @@ alert("位置情報の取得に失敗しました");
 }
 
 );
+
+}
+
+function toggleRoadMode(){
+
+roadMode = !roadMode;
+
+if(roadMode){
+
+roadPoints = [];
+
+if(tempLine){
+map.removeLayer(tempLine);
+tempLine = null;
+}
+
+alert("道路モード開始！道路に沿ってタップしてください");
+
+}else{
+
+alert("道路モード終了");
+
+}
 
 }
   
