@@ -216,6 +216,16 @@ if(confirm("この道路を削除しますか？")){
 
 map.removeLayer(road);
 
+roads = roads.filter(r =>
+JSON.stringify(r.points) !==
+JSON.stringify(points)
+);
+
+localStorage.setItem(
+"pennyRoads",
+JSON.stringify(roads)
+);
+
 }
 
 });
