@@ -126,9 +126,8 @@ let roadMode = false;
 let roadPoints = [];
 let tempLine = null;
 let roads =
-let deleteMode = false;
-
 JSON.parse(localStorage.getItem("pennyRoads") || "[]");
+let deleteMode = false;
   
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
