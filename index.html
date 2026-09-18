@@ -58,6 +58,17 @@ html, body, #map {
   font-size: 20px;
 }
 
+.delete-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 200px;
+  z-index: 1000;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+}
+  
 .legend {
   position: fixed;
   left: 10px;
@@ -100,6 +111,10 @@ html, body, #map {
 <button class="finish-btn" onclick="finishRoad()">
 ✅
 </button>
+
+<button class="delete-btn" onclick="toggleDeleteMode()">
+🗑️
+</button>
   
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -111,6 +126,8 @@ let roadMode = false;
 let roadPoints = [];
 let tempLine = null;
 let roads =
+let deleteMode = false;
+
 JSON.parse(localStorage.getItem("pennyRoads") || "[]");
   
 L.tileLayer(
@@ -189,6 +206,20 @@ road.bindPopup(
 "<br>" +
 comment
 );
+
+road.on("click", function(){
+
+if(!deleteMode){
+return;
+}
+
+if(confirm("この道路を削除しますか？")){
+
+map.removeLayer(road);
+
+}
+
+});
 
 }
 
@@ -374,6 +405,18 @@ tempLine = null;
 roadMode = false;
 
 alert("道路を保存しました！");
+}
+
+function toggleDeleteMode(){
+
+deleteMode = !deleteMode;
+
+if(deleteMode){
+alert("削除モードON");
+}else{
+alert("削除モードOFF");
+}
+
 }
   
 </script>
