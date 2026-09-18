@@ -176,9 +176,39 @@ border:2px solid white;
 className: ""
 });
 
-L.marker([lat,lng], {icon})
+const marker = L.marker([lat,lng], {icon})
 .addTo(map)
 .bindPopup(comment);
+
+marker.on("click", function(){
+
+if(!deleteMode){
+return;
+}
+
+if(confirm("このピンを削除しますか？")){
+
+map.removeLayer(marker);
+
+let markers =
+JSON.parse(localStorage.getItem("pennyMarkers") || "[]");
+
+markers = markers.filter(m =>
+!(
+m.lat === lat &&
+m.lng === lng &&
+m.comment === comment
+)
+);
+
+localStorage.setItem(
+"pennyMarkers",
+JSON.stringify(markers)
+);
+
+}
+
+});
 
 }
 
