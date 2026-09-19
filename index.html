@@ -106,6 +106,21 @@ html, body, #map {
   display: none;
 }
 
+#modeDisplay {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -114,6 +129,10 @@ html, body, #map {
 <div class="info">
 🛹 ペニーマップ<br>
 地図をタップして路面情報を登録
+</div>
+
+<div id="modeDisplay">
+📌 ピンモード
 </div>
 
 <div id="map"></div>
@@ -430,6 +449,8 @@ map.removeLayer(tempLine);
 tempLine = null;
 }
 
+document.getElementById("modeDisplay").innerHTML =
+"🛣️ 道路モード";
 alert("道路モード開始！道路に沿ってタップしてください");
 
 }else{
@@ -494,6 +515,8 @@ pinMode = false;
 roadMode = false;
 deleteMode = true;
 
+document.getElementById("modeDisplay").innerHTML =
+"🗑️ 削除モード";
 alert("削除モードON");
 
 }  
@@ -504,6 +527,8 @@ pinMode = true;
 roadMode = false;
 deleteMode = false;
 
+document.getElementById("modeDisplay").innerHTML =
+"📌 ピンモード";
 alert("ピンモードON");
 
 }
