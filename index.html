@@ -230,11 +230,7 @@ const marker = L.marker([lat,lng], {icon})
 .addTo(map)
 .bindPopup(comment);
 
-marker.on("click", function(){
-
-if(!deleteMode){
-return;
-}
+marker.on("dblclick", function(){
 
 if(confirm("このピンを削除しますか？")){
 
@@ -286,11 +282,7 @@ road.bindPopup(
 comment
 );
 
-road.on("click", function(){
-
-if(!deleteMode){
-return;
-}
+road.on("dblclick", function(){
 
 if(confirm("この道路を削除しますか？")){
 
