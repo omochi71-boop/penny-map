@@ -25,72 +25,6 @@ html, body, #map {
   font-size: 12px;
 }
 
-.menu-btn {
-  position: fixed;
-  right: 15px;
-  top: 70px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-.location-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 20px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}  
-
-.road-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 80px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-.finish-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 140px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-.delete-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 200px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
-.pin-btn {
-  position: fixed;
-  right: 15px;
-  bottom: 260px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-}
-
 .legend {
   position: fixed;
   left: 10px;
@@ -125,21 +59,71 @@ html, body, #map {
   font-weight: bold;
 }
 
+.menu-btn,
+.legend-btn,
+.pin-btn,
+.location-btn,
+.road-btn,
+.finish-btn,
+.delete-btn {
+  width: 50px;
+  height: 50px;
+
+  background: white;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+  z-index: 1000;
+}
+
+.menu-btn {
+  position: fixed;
+  right: 15px;
+  top: 70px;
+}
+
 .legend-btn {
   position: fixed;
   right: 15px;
   top: 130px;
-  z-index: 1000;
-  padding: 12px;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
 }
 
-.menu-btn,
-.legend-btn {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+.pin-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+}
+
+.location-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 80px;
+}
+
+.road-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 140px;
+}
+
+.finish-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 200px;
+}
+
+.delete-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 260px;
 }
 
 </style>
