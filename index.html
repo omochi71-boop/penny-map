@@ -68,7 +68,18 @@ html, body, #map {
   border-radius: 50%;
   font-size: 20px;
 }
-  
+
+.pin-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 260px;
+  z-index: 1000;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
 .legend {
   position: fixed;
   left: 10px;
@@ -100,6 +111,10 @@ html, body, #map {
 🔴 ★☆☆☆☆ 厳しい
 </div>
 
+<button class="pin-btn" onclick="togglePinMode()">
+📌
+</button>
+
 <button class="location-btn" onclick="goToLocation()">
 📍
 </button>
@@ -122,12 +137,15 @@ html, body, #map {
 
 const map = L.map('map').setView([31.9111,131.4239], 13);
 
+let pinMode = true;
 let roadMode = false;
+let deleteMode = false;
+
 let roadPoints = [];
 let tempLine = null;
+
 let roads =
 JSON.parse(localStorage.getItem("pennyRoads") || "[]");
-let deleteMode = false;
   
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -309,7 +327,15 @@ weight:5
 
 return;
 }
-  
+
+if(deleteMode){
+return;
+}
+
+if(!pinMode){
+return;
+}
+
 const rating = prompt(
 "路面評価を入力してください（1〜5）"
 );
@@ -377,7 +403,9 @@ alert("位置情報の取得に失敗しました");
 
 function toggleRoadMode(){
 
-roadMode = !roadMode;
+pinMode = false;
+deleteMode = false;
+roadMode = true;
 
 if(roadMode){
 
@@ -448,12 +476,24 @@ alert("道路を保存しました！");
 
 function toggleDeleteMode(){
 
-deleteMode = !deleteMode;
+pinMode = false;
+roadMode = false;
+deleteMode = true;
 
 if(deleteMode){
 alert("削除モードON");
 }else{
 alert("削除モードOFF");
+}
+
+function togglePinMode(){
+
+pinMode = true;
+roadMode = false;
+deleteMode = false;
+
+alert("ピンモードON");
+
 }
 
 }
