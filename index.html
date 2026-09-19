@@ -126,6 +126,10 @@ html, body, #map {
   bottom: 260px;
 }
 
+.active-mode {
+  background: #4CAF50 !important;
+}
+
 </style>
 </head>
 
@@ -183,6 +187,10 @@ let roadMode = false;
 let deleteMode = false;
 let menuVisible = false;
 let legendVisible = false;
+
+window.onload = function(){
+updateModeButtons();
+}
 
 let roadPoints = [];
 let tempLine = null;
@@ -450,6 +458,8 @@ pinMode = false;
 deleteMode = false;
 roadMode = true;
 
+updateModeButtons();
+
 if(roadMode){
 
 roadPoints = [];
@@ -525,6 +535,8 @@ pinMode = false;
 roadMode = false;
 deleteMode = true;
 
+updateModeButtons();
+
 document.getElementById("modeDisplay").innerHTML =
 "🗑️ 削除モード";
 alert("削除モードON");
@@ -536,6 +548,8 @@ function togglePinMode(){
 pinMode = true;
 roadMode = false;
 deleteMode = false;
+
+updateModeButtons();
 
 document.getElementById("modeDisplay").innerHTML =
 "📌 ピンモード";
@@ -554,6 +568,34 @@ if(menuVisible){
 panel.style.display = "block";
 }else{
 panel.style.display = "none";
+}
+
+}
+
+function updateModeButtons(){
+
+document.querySelector(".pin-btn")
+.classList.remove("active-mode");
+
+document.querySelector(".road-btn")
+.classList.remove("active-mode");
+
+document.querySelector(".delete-btn")
+.classList.remove("active-mode");
+
+if(pinMode){
+document.querySelector(".pin-btn")
+.classList.add("active-mode");
+}
+
+if(roadMode){
+document.querySelector(".road-btn")
+.classList.add("active-mode");
+}
+
+if(deleteMode){
+document.querySelector(".delete-btn")
+.classList.add("active-mode");
 }
 
 }
