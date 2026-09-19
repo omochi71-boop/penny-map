@@ -25,6 +25,17 @@ html, body, #map {
   font-size: 14px;
 }
 
+.menu-btn {
+  position: fixed;
+  right: 15px;
+  top: 70px;
+  z-index: 1000;
+  padding: 12px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
 .location-btn {
   position: fixed;
   right: 15px;
@@ -91,6 +102,10 @@ html, body, #map {
   font-size: 12px;
 } 
 
+#menuPanel {
+  display: none;
+}
+
 </style>
 </head>
 
@@ -103,6 +118,25 @@ html, body, #map {
 
 <div id="map"></div>
 
+<div id="menuPanel">
+
+📍
+</button>
+
+🛣️
+</button>
+
+✅
+</button>
+
+🗑️
+</button>
+
+📌
+</button>
+
+</div>
+
 <div class="legend">
 🟢 ★★★★★ 快適<br>
 🔵 ★★★★☆ 良好<br>
@@ -110,6 +144,10 @@ html, body, #map {
 🟠 ★★☆☆☆ 荒れ気味<br>
 🔴 ★☆☆☆☆ 厳しい
 </div>
+
+<button class="menu-btn" onclick="toggleMenu()">
+☰
+</button>
 
 <button class="pin-btn" onclick="togglePinMode()">
 📌
@@ -140,6 +178,7 @@ const map = L.map('map').setView([31.9111,131.4239], 13);
 let pinMode = true;
 let roadMode = false;
 let deleteMode = false;
+let menuVisible = false;
 
 let roadPoints = [];
 let tempLine = null;
@@ -493,7 +532,22 @@ deleteMode = false;
 alert("ピンモードON");
 
 }
-  
+
+function toggleMenu(){
+
+menuVisible = !menuVisible;
+
+const panel =
+document.getElementById("menuPanel");
+
+if(menuVisible){
+panel.style.display = "block";
+}else{
+panel.style.display = "none";
+}
+
+}
+
 </script>
 
 </body>
