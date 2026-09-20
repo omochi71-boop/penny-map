@@ -686,9 +686,17 @@ document.getElementById("ratingPanel")
 const comment = prompt(
 "道路コメントを入力してください"
 );
-
+  
 if(!comment){
+
 roadRatingMode = false;
+selectedRating = 0;
+
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
+
 return;
 }
 
@@ -736,6 +744,14 @@ const comment = prompt(
 );
 
 if(!comment){
+
+selectedRating = 0;
+
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
+
 return;
 }
 
