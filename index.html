@@ -110,23 +110,23 @@ html, body, #map {
 }
 
 .popup-box{
-  position: relative;
   min-width: 120px;
+}
 
-  padding-bottom: 40px;
+.popup-content{
+  margin-bottom: 12px;
+}
+
+.popup-actions{
+  text-align: right;
 }
 
 .delete-marker-btn,
 .delete-road-btn{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
   border: none;
   background: transparent;
-
   font-size: 18px;
-  padding: 0;
+  cursor: pointer;
 }
 
 </style>
@@ -242,8 +242,15 @@ const marker = L.marker([lat,lng], {icon})
 
 const popupText =
 '<div class="popup-box">' +
-'<button class="delete-marker-btn">🗑️</button>' +
+
+'<div class="popup-content">' +
 comment +
+'</div>' +
+
+'<div class="popup-actions">' +
+'<button class="delete-marker-btn">🗑️</button>' +
+'</div>' +
+
 '</div>';
 
 marker.bindPopup(popupText);
@@ -311,10 +318,17 @@ weight: 14
 
 const popupText =
 '<div class="popup-box">' +
-'<button class="delete-road-btn">🗑️</button>' +
+
+'<div class="popup-content">' +
 "★".repeat(rating) +
 "<br>" +
 comment +
+'</div>' +
+
+'<div class="popup-actions">' +
+'<button class="delete-road-btn">🗑️</button>' +
+'</div>' +
+
 '</div>';
 
 road.bindPopup(popupText);
