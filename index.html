@@ -486,6 +486,13 @@ pendingLatLng = e.latlng;
 
 selectedRating = 0;
 
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
+  
+selectedRating = 0;
+
 document.getElementById("ratingPanel")
 .style.display = "block";
 
@@ -578,6 +585,13 @@ return;
 }
 
 roadRatingMode = true;
+
+selectedRating = 0;
+
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
 
 selectedRating = 0;
 
