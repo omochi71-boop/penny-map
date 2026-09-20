@@ -109,6 +109,14 @@ html, body, #map {
   background: #4CAF50 !important;
 }
 
+.delete-marker-btn,
+.delete-road-btn {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  padding: 0;
+}
+
 </style>
 </head>
 
@@ -222,7 +230,7 @@ const marker = L.marker([lat,lng], {icon})
 
 const popupText =
 comment +
-'<br><br><button class="delete-marker-btn">🗑️削除</button>';
+'<br><br><button class="delete-marker-btn">🗑️</button>';
 
 marker.bindPopup(popupText);
 
@@ -291,7 +299,7 @@ const popupText =
 "★".repeat(rating) +
 "<br>" +
 comment +
-'<br><br><button class="delete-road-btn">🗑️削除</button>';
+'<br><br><button class="delete-road-btn">🗑️</button>';
 
 road.bindPopup(popupText);
 
