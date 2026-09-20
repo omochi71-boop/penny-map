@@ -486,11 +486,6 @@ pendingLatLng = e.latlng;
 
 selectedRating = 0;
 
-document.querySelectorAll(".star")
-.forEach(s => {
-s.textContent = "☆";
-});
-
 document.getElementById("ratingPanel")
 .style.display = "block";
 
@@ -585,11 +580,6 @@ return;
 roadRatingMode = true;
 
 selectedRating = 0;
-
-document.querySelectorAll(".star")
-.forEach(s => {
-s.textContent = "☆";
-});
 
 document.getElementById("ratingPanel")
 .style.display = "block";
@@ -854,6 +844,45 @@ JSON.stringify(roads)
 location.reload();
 
 }
+
+window.addEventListener("load", function(){
+
+document.querySelectorAll(".star")
+.forEach(star => {
+
+star.addEventListener("click", function(){
+
+selectedRating =
+Number(this.dataset.rating);
+
+document.querySelectorAll(".star")
+.forEach((s,index)=>{
+
+if(index < selectedRating){
+s.textContent = "⭐";
+}else{
+s.textContent = "☆";
+}
+
+});
+
+});
+
+});
+
+document.getElementById("ratingOkBtn")
+.addEventListener("click", function(){
+
+if(selectedRating === 0){
+alert("評価を選んでください");
+return;
+}
+
+selectRating(selectedRating);
+
+});
+
+});
 
 alert(document.querySelectorAll(".star").length);
   
