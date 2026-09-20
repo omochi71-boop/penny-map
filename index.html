@@ -296,11 +296,26 @@ weight: 14
 }
 ).addTo(map);
 
-road.bindPopup(
+const popupText =
 "★".repeat(rating) +
 "<br>" +
-comment
-);
+comment +
+'<br><br><button class="delete-road-btn">🗑️削除</button>';
+
+road.bindPopup(popupText);
+
+road.on("popupopen", function(){
+
+const btn =
+document.querySelector(".delete-road-btn");
+
+btn.onclick = function(){
+
+deleteRoad(points);
+
+};
+
+});
 
 road.on("dblclick", function(){
 
@@ -612,6 +627,26 @@ m.comment === comment
 localStorage.setItem(
 "pennyMarkers",
 JSON.stringify(markers)
+);
+
+location.reload();
+
+}
+
+function deleteRoad(points){
+
+if(!confirm("この道路を削除しますか？")){
+return;
+}
+
+roads = roads.filter(r =>
+JSON.stringify(r.points) !==
+JSON.stringify(points)
+);
+
+localStorage.setItem(
+"pennyRoads",
+JSON.stringify(roads)
 );
 
 location.reload();
