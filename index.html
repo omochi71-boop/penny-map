@@ -231,11 +231,22 @@ const marker = L.marker([lat,lng], {icon})
 
 const popupText =
 comment +
-'<br><br><button onclick="deleteMarker(' +
-lat + ',' +
-lng + ',' +
-JSON.stringify(comment) +
-')">🗑️削除</button>';
+'<br><br><button class="delete-marker-btn">🗑️削除</button>';
+
+marker.bindPopup(popupText);
+
+marker.on("popupopen", function(){
+
+const btn =
+document.querySelector(".delete-marker-btn");
+
+btn.onclick = function(){
+
+deleteMarker(lat,lng,comment);
+
+};
+
+});
 
 marker.bindPopup(popupText);
 
