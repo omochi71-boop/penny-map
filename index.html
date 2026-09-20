@@ -189,7 +189,8 @@ let tempLine = null;
 
 let selectedRating = null;
 let pendingLatLng = null;
-  
+let roadRatingMode = false;
+
 let roads =
 JSON.parse(localStorage.getItem("pennyRoads") || "[]");
   
@@ -516,15 +517,12 @@ alert("道路を2点以上選んでください");
 return;
 }
 
-const rating = prompt(
-"道路評価を入力してください（1〜5）"
-);
+roadRatingMode = true;
 
-if(!rating) return;
+document.getElementById("ratingPanel")
+.style.display = "block";
 
-const comment = prompt(
-"道路コメントを入力してください"
-);
+return;
 
 if(!comment) return;
   
@@ -618,6 +616,54 @@ legend.style.display = "none";
 
 function selectRating(rating){
 
+if(roadRatingMode){
+
+document.getElementById("ratingPanel")
+.style.display = "none";
+
+const comment = prompt(
+"道路コメントを入力してください"
+);
+
+if(!comment){
+roadRatingMode = false;
+return;
+}
+
+addRoad(
+roadPoints,
+rating,
+comment
+);
+
+roads.push({
+points: roadPoints,
+rating: rating,
+comment: comment
+});
+
+localStorage.setItem(
+"pennyRoads",
+JSON.stringify(roads)
+);
+
+if(tempLine){
+map.removeLayer(tempLine);
+}
+
+roadPoints = [];
+tempLine = null;
+
+roadMode = false;
+roadRatingMode = false;
+
+updateModeButtons();
+
+alert("道路を保存しました！");
+
+return;
+}
+  
 selectedRating = rating;
 
 document.getElementById("ratingPanel")
