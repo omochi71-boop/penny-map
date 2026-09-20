@@ -189,7 +189,28 @@ html, body, #map {
 🟠 ★★☆☆☆ 荒れ気味<br>
 🔴 ★☆☆☆☆ 厳しい
 </div>
-  
+
+<div id="ratingPanel" style="
+display:none;
+position:fixed;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:20px;
+border-radius:12px;
+z-index:2000;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+">
+
+<div style="
+font-size:18px;
+margin-bottom:15px;
+">
+路面評価を選んでください
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
@@ -819,27 +840,6 @@ location.reload();
 }
 
 </script>
-
-<div id="ratingPanel" style="
-display:none;
-position:fixed;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-background:white;
-padding:20px;
-border-radius:12px;
-z-index:2000;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-">
-
-<div style="
-font-size:18px;
-margin-bottom:15px;
-">
-路面評価を選んでください
-</div>
 
 <div id="starButtons">
 
