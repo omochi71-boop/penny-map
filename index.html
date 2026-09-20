@@ -129,6 +129,16 @@ html, body, #map {
   cursor: pointer;
 }
 
+.star{
+  font-size: 40px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.star:hover{
+  transform: scale(1.2);
+}
+
 </style>
 </head>
 
@@ -761,16 +771,25 @@ text-align:center;
 box-shadow:0 0 10px rgba(0,0,0,0.3);
 ">
 
-<div style="margin-bottom:10px;">
-評価を選んでください
+<div style="
+font-size:18px;
+margin-bottom:15px;
+">
+路面評価を選んでください
 </div>
 
 <div id="starButtons">
-<button onclick="selectRating(1)">★☆☆☆☆</button><br><br>
-<button onclick="selectRating(2)">★★☆☆☆</button><br><br>
-<button onclick="selectRating(3)">★★★☆☆</button><br><br>
-<button onclick="selectRating(4)">★★★★☆</button><br><br>
-<button onclick="selectRating(5)">★★★★★</button>
+
+<span class="star" onclick="selectRating(1)">⭐</span>
+
+<span class="star" onclick="selectRating(2)">⭐</span>
+
+<span class="star" onclick="selectRating(3)">⭐</span>
+
+<span class="star" onclick="selectRating(4)">⭐</span>
+
+<span class="star" onclick="selectRating(5)">⭐</span>
+
 </div>
 
 </div>
