@@ -139,6 +139,17 @@ html, body, #map {
   transform: scale(1.2);
 }
 
+.star{
+  font-size:40px;
+  cursor:pointer;
+  margin:5px;
+}
+
+#ratingOkBtn{
+  margin-top:15px;
+  padding:8px 16px;
+}
+
 </style>
 </head>
 
@@ -197,7 +208,7 @@ updateModeButtons();
 let roadPoints = [];
 let tempLine = null;
 
-let selectedRating = null;
+let selectedRating = 0;
 let pendingLatLng = null;
 let roadRatingMode = false;
 
@@ -436,6 +447,13 @@ return;
 
 pendingLatLng = e.latlng;
 
+selectedRating = 0;
+
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
+
 document.getElementById("ratingPanel")
 .style.display = "block";
 
@@ -528,6 +546,13 @@ return;
 }
 
 roadRatingMode = true;
+
+selectedRating = 0;
+
+document.querySelectorAll(".star")
+.forEach(s => {
+s.textContent = "☆";
+});
 
 document.getElementById("ratingPanel")
 .style.display = "block";
@@ -709,6 +734,41 @@ rating
 
 }
 
+document.querySelectorAll(".star")
+.forEach(star => {
+
+star.addEventListener("click", function(){
+
+selectedRating =
+Number(this.dataset.rating);
+
+document.querySelectorAll(".star")
+.forEach((s,index)=>{
+
+if(index < selectedRating){
+s.textContent = "⭐";
+}else{
+s.textContent = "☆";
+}
+
+});
+
+});
+
+});
+
+document.getElementById("ratingOkBtn")
+.addEventListener("click", function(){
+
+if(selectedRating === 0){
+alert("評価を選んでください");
+return;
+}
+
+selectRating(selectedRating);
+
+});
+
 function deleteMarker(lat,lng,comment){
 
 if(!confirm("このピンを削除しますか？")){
@@ -780,17 +840,21 @@ margin-bottom:15px;
 
 <div id="starButtons">
 
-<span class="star" onclick="selectRating(1)">⭐</span>
+<span class="star" data-rating="1">☆</span>
 
-<span class="star" onclick="selectRating(2)">⭐</span>
+<span class="star" data-rating="2">☆</span>
 
-<span class="star" onclick="selectRating(3)">⭐</span>
+<span class="star" data-rating="3">☆</span>
 
-<span class="star" onclick="selectRating(4)">⭐</span>
+<span class="star" data-rating="4">☆</span>
 
-<span class="star" onclick="selectRating(5)">⭐</span>
+<span class="star" data-rating="5">☆</span>
 
 </div>
+
+<button id="ratingOkBtn">
+決定
+</button>
 
 </div>
 
