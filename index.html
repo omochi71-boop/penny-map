@@ -453,7 +453,7 @@ road.comment
 );
 
 });
- 
+
 map.on('click', function(e){
 
 if(roadMode){
@@ -490,38 +490,9 @@ document.querySelectorAll(".star")
 .forEach(s => {
 s.textContent = "☆";
 });
-  
-selectedRating = 0;
 
 document.getElementById("ratingPanel")
 .style.display = "block";
-
-return;
-
-const comment = prompt(
-"路面情報を入力してください"
-);
-
-if(!comment) return;
-
-const stars = "★".repeat(Number(rating));
-
-const text =
-stars + "<br>" + comment;
-
-addMarker(
-e.latlng.lat,
-e.latlng.lng,
-text,
-Number(rating)
-);
-
-saveMarker(
-e.latlng.lat,
-e.latlng.lng,
-text,
-Number(rating)
-);
 
 });
 
@@ -599,37 +570,6 @@ document.getElementById("ratingPanel")
 .style.display = "block";
 
 return;
-
-if(!comment) return;
-  
-addRoad(
-roadPoints,
-Number(rating),
-comment
-);
-
-roads.push({
-points: roadPoints,
-rating: Number(rating),
-comment: comment
-});
-
-localStorage.setItem(
-"pennyRoads",
-JSON.stringify(roads)
-);
-
-if(tempLine){
-map.removeLayer(tempLine);
-}
-
-roadPoints = [];
-tempLine = null;
-
-roadMode = false;
-
-alert("道路を保存しました！");
-}
 
 function togglePinMode(){
 
@@ -791,41 +731,6 @@ rating
 
 }
 
-document.querySelectorAll(".star")
-.forEach(star => {
-
-star.addEventListener("click", function(){
-
-selectedRating =
-Number(this.dataset.rating);
-
-document.querySelectorAll(".star")
-.forEach((s,index)=>{
-
-if(index < selectedRating){
-s.textContent = "⭐";
-}else{
-s.textContent = "☆";
-}
-
-});
-
-});
-
-});
-
-document.getElementById("ratingOkBtn")
-.addEventListener("click", function(){
-
-if(selectedRating === 0){
-alert("評価を選んでください");
-return;
-}
-
-selectRating(selectedRating);
-
-});
-
 function deleteMarker(lat,lng,comment){
 
 if(!confirm("このピンを削除しますか？")){
@@ -874,40 +779,40 @@ location.reload();
 
 window.addEventListener("load", function(){
 
-document.querySelectorAll(".star")
-.forEach(star => {
+  document.querySelectorAll(".star")
+  .forEach(star => {
 
-star.addEventListener("click", function(){
+    star.addEventListener("click", function(){
 
-selectedRating =
-Number(this.dataset.rating);
+      selectedRating =
+      Number(this.dataset.rating);
 
-document.querySelectorAll(".star")
-.forEach((s,index)=>{
+      document.querySelectorAll(".star")
+      .forEach((s,index)=>{
 
-if(index < selectedRating){
-s.textContent = "⭐";
-}else{
-s.textContent = "☆";
-}
+        if(index < selectedRating){
+          s.textContent = "⭐";
+        }else{
+          s.textContent = "☆";
+        }
 
-});
+      });
 
-});
+    });
 
-});
+  });
 
-document.getElementById("ratingOkBtn")
-.addEventListener("click", function(){
+  document.getElementById("ratingOkBtn")
+  .addEventListener("click", function(){
 
-if(selectedRating === 0){
-alert("評価を選んでください");
-return;
-}
+    if(selectedRating === 0){
+      alert("評価を選んでください");
+      return;
+    }
 
-selectRating(selectedRating);
+    selectRating(selectedRating);
 
-});
+  });
 
 });
   
