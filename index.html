@@ -634,30 +634,17 @@ if(roadRatingMode){
 
 document.getElementById("ratingPanel")
 .style.display = "none";
-  
-if(!comment){
-
-roadRatingMode = false;
-selectedRating = 0;
-
-document.querySelectorAll(".star")
-.forEach(s => {
-s.textContent = "☆";
-});
-
-return;
-}
 
 addRoad(
 roadPoints,
 rating,
-comment
+""
 );
 
 roads.push({
 points: roadPoints,
 rating: rating,
-comment: comment
+comment: ""
 });
 
 localStorage.setItem(
