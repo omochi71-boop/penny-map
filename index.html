@@ -46,6 +46,7 @@ html, body, #map {
 
 .menu-btn,
 .legend-btn,
+.help-btn,
 .pin-btn,
 .location-btn,
 .road-btn,
@@ -79,6 +80,12 @@ html, body, #map {
   position: fixed;
   right: 15px;
   top: 130px;
+}
+
+.help-btn {
+  position: fixed;
+  right: 15px;
+  top: 190px;
 }
 
 .pin-btn {
@@ -162,6 +169,10 @@ html, body, #map {
 
 <div id="map"></div>
 
+<button class="help-btn" onclick="showHelp()">
+❓
+</button>
+  
 <button class="menu-btn" onclick="toggleMenu()">
 ☰
 </button>
@@ -733,6 +744,20 @@ rating
 
 }
 
+function showHelp(){
+
+alert(
+"🛹 ペニーマップの使い方\n\n" +
+"📌 ピンモード\n" +
+"地図をタップした地点にピンを立て、評価とコメントを記録します。\n\n" +
+"🛣️ 道路モード\n" +
+"地図上を2点以上タップすると、その地点間を直線で結び、道を描きます。その道の評価とコメントをしてください。\n\n" +
+"📍 現在地へ移動\n\n" +
+"🌈 色の意味を表示"
+);
+
+}
+
 function deleteMarker(lat,lng,comment){
 
 if(!confirm("このピンを削除しますか？")){
@@ -781,6 +806,17 @@ location.reload();
 
 window.addEventListener("load", function(){
 
+ if(!localStorage.getItem("helpShown")){
+
+showHelp();
+
+localStorage.setItem(
+"helpShown",
+"yes"
+);
+
+}
+  
   document.querySelectorAll(".star")
   .forEach(star => {
 
