@@ -261,7 +261,7 @@ attribution:'© OpenStreetMap'
 }
 ).addTo(map);
 
-function saveMarker(lat,lng,comment,rating){
+function saveMarker(lat,lng,comment){
 
 const markers =
 JSON.parse(localStorage.getItem("pennyMarkers") || "[]");
@@ -269,8 +269,7 @@ JSON.parse(localStorage.getItem("pennyMarkers") || "[]");
 markers.push({
 lat,
 lng,
-comment,
-rating
+comment
 });
 
 localStorage.setItem(
@@ -280,25 +279,12 @@ JSON.stringify(markers)
 
 }
 
-function addMarker(lat,lng,comment,rating){
-
-let color = "blue";
-
-if(rating == 5) color = "green";
-if(rating == 4) color = "blue";
-if(rating == 3) color = "gold";
-if(rating == 2) color = "orange";
-if(rating == 1) color = "red";
+function addMarker(lat,lng,comment){
 
 const icon = L.divIcon({
-html: `<div style="
-width:18px;
-height:18px;
-border-radius:50%;
-background:${color};
-border:2px solid white;
-"></div>`,
-className: ""
+html: "📍",
+className: "",
+iconSize: [30,30]
 });
 
 const marker = L.marker([lat,lng], {icon})
@@ -440,8 +426,7 @@ savedMarkers.forEach(marker => {
 addMarker(
 marker.lat,
 marker.lng,
-marker.comment,
-marker.rating
+marker.comment
 );
 
 });
@@ -484,19 +469,25 @@ if(!pinMode){
 return;
 }
 
-pendingLatLng = e.latlng;
+const comment = prompt(
+"スポット情報を入力してください"
+);
 
-selectedRating = 0;
+if(!comment){
+return;
+}
 
-document.querySelectorAll(".star")
-.forEach(s => {
-s.textContent = "☆";
-});
+addMarker(
+e.latlng.lat,
+e.latlng.lng,
+comment
+);
 
-document.getElementById("ratingPanel")
-.style.display = "block";
-
-});
+saveMarker(
+e.latlng.lat,
+e.latlng.lng,
+comment
+);
 
 function goToLocation(){
 
