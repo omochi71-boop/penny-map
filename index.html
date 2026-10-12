@@ -508,10 +508,12 @@ const lng = position.coords.longitude;
 map.setView([lat,lng],17);
 
 L.circleMarker([lat,lng],{
-radius:8
-}).addTo(map)
-.bindPopup("現在地")
-.openPopup();
+radius:10,
+color:"white",
+weight:3,
+fillColor:"#007AFF",
+fillOpacity:1
+})
 
 },
 
